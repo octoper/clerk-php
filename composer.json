@@ -1,5 +1,5 @@
 {
-  "name": "octoper/clerkphp",
+  "name": "octoper/clerk-php",
   "description": "Access the Clerk Backend API from PHP",
   "keywords": [
     "Octoper",
@@ -20,7 +20,6 @@
   },
   "require-dev": {
     "laravel/pint": "^1.0",
-    "marcocesarato/php-conventional-changelog": "^1.17",
     "pestphp/pest": "^2.34"
   },
   "autoload": {
