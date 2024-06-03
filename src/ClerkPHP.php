@@ -47,16 +47,53 @@ use Saloon\Http\Connector;
  */
 class ClerkPHP extends Connector
 {
-    public function __construct(public readonly string $api_key) {}
+    public function __construct(
+        protected string $secret_key,
+        protected ?string $publishable_key = null,
+    ) { }
+
+    public function setPublishableKey(
+        string $publishable_key
+    ): self {
+        $this->publishable_key = $publishable_key;
+
+        return $this;
+    }
+
+    public function publishableKey(): ?string
+    {
+        return $this->publishable_key;
+    }
+
+    public function secretKey(): string
+    {
+        return $this->secret_key;
+    }
+
+    public function setSecretKey(
+        string $secret_key
+    ): self {
+        $this->secret_key = $secret_key;
+
+        return $this;
+    }
 
     protected function defaultAuth(): TokenAuthenticator
     {
-        return new TokenAuthenticator($this->api_key);
+        return new TokenAuthenticator($this->secret_key);
     }
 
     public function resolveBaseUrl(): string
     {
         return 'https://api.clerk.com/v1';
+    }
+
+    protected function defaultHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ];
     }
 
     public function actorTokens(): ActorTokens

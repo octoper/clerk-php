@@ -19,6 +19,7 @@ class ListAllowlistIdentifiers extends BaseRequest
         return '/allowlist_identifiers';
     }
 
-    public function __construct() {
+    public function __construct()
+    {
     }
 }

@@ -26,5 +26,6 @@ class CreateSessionTokenFromTemplate extends BaseRequest
     public function __construct(
         protected string $sessionId,
         protected string $templateName,
-    ) { }
+    ) {
+    }
 }
