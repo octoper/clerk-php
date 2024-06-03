@@ -28,6 +28,7 @@ use Octoper\ClerkPHP\Resource\SignUps;
 use Octoper\ClerkPHP\Resource\TestingTokens;
 use Octoper\ClerkPHP\Resource\Users;
 use Octoper\ClerkPHP\Resource\Webhooks;
+use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 
 /**
@@ -46,6 +47,13 @@ use Saloon\Http\Connector;
  */
 class ClerkPHP extends Connector
 {
+    public function __construct(public readonly string $api_key) {}
+
+    protected function defaultAuth(): TokenAuthenticator
+    {
+        return new TokenAuthenticator($this->api_key);
+    }
+
     public function resolveBaseUrl(): string
     {
         return 'https://api.clerk.com/v1';
